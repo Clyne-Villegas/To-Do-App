@@ -60,6 +60,19 @@
     margin-top: 20px;
 }
 
+/* Active menu item */
+.sidebar ul li.active {
+    background-color: #5e1b89; /* Highlight color */
+    color: white;
+    font-weight: bold;
+}
+
+/* Hover effect */
+.toggle-btn:hover,
+.sidebar ul li:hover {
+    color: #ff7f4d;
+}
+
 .sidebar ul li {
     display: flex;
     align-items: center;
@@ -70,31 +83,18 @@
     transition: background 0.3s ease-in-out;
 }
 
-/* Active menu item */
-.sidebar ul li.active {
-    background-color: #5e1b89; /* Highlight color */
-    color: white;
-    font-weight: bold;
-}
-
-/* Sidebar icons */
 .sidebar ul li i {
-    font-size: 24px; /* Ensure all icons have the same size */
-    margin-right: 10px;
+    font-size: 24px;
+    margin-right: 10px; /* Space between icon and text */
+    width: 30px; /* Ensures all icons take up the same width */
+    text-align: center; /* Aligns icons properly */
 }
 
-/* Keep icons centered when minimized */
+/* When minimized, center everything */
 .sidebar.minimized ul li {
     justify-content: center;
 }
 
-/* Remove margin when sidebar is minimized */
 .sidebar.minimized ul li i {
-    margin-right: 0;
-}
-
-/* Hover effect */
-.toggle-btn:hover,
-.sidebar ul li:hover {
-    color: #ff7f4d;
+    margin-right: 0; /* Remove space when minimized */
 }
