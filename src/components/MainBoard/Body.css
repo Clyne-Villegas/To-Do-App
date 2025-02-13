@@ -1,0 +1,55 @@
+/* Body container: Ensuring full height of the screen */
+.body-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+  overflow: hidden; /* Prevent scrolling on the body container */
+}
+
+/* Default content state */
+.content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 220px; /* Default margin for the full sidebar width */
+  transition: margin-left 0.3s ease-in-out;
+  height: calc(100vh - 80px); /* Make content fit within the height, excluding the header */
+  overflow: auto; /* Allow scrolling if the content overflows */
+}
+
+.body-container.sidebar-minimized .content {
+  margin-left: 60px; /* Space for the minimized sidebar */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px; /* Full sidebar width */
+  transition: width 0.3s ease-in-out;
+}
+
+.body-container.sidebar-minimized .sidebar {
+  width: 60px; /* Minimized sidebar width */
+}
+
+/* Header styles to align the title and button */
+.header {
+  display: flex;
+  justify-content: space-between; /* This will push the button to the right */
+  align-items: center;
+  margin-bottom: 20px; /* Adds space between the header and the calendar */
+}
+
+/* Style for the "Add Task" button */
+#add-task-btn {
+  padding: 10px 20px;  /* Slightly more padding for better clickability */
+  background-color: #ff7f4d;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Slightly rounder corners for a smoother look */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform transition for a subtle scaling effect */
+}
+
+#add-task-btn:hover {
+  background-color: #5e1b89; /* Darker blue when hovered */
+}
