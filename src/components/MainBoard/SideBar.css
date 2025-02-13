@@ -70,6 +70,13 @@
     transition: background 0.3s ease-in-out;
 }
 
+/* Active menu item */
+.sidebar ul li.active {
+    background-color: #5e1b89; /* Highlight color */
+    color: white;
+    font-weight: bold;
+}
+
 /* Sidebar icons */
 .sidebar ul li i {
     font-size: 24px; /* Ensure all icons have the same size */

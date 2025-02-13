@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "../Calendar/Calendar";
 import Sidebar from "./SideBar";
 import Modal from "../Modal/Modal";
@@ -7,59 +7,72 @@ import "./Body.css";
 function Body() {
   const [isMinimized, setMinimized] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tasks, setTasks] = useState([]); // Array to store tasks
-  const [selectedDate, setSelectedDate] = useState(null); // Track selected date for modal
+  const [tasks, setTasks] = useState([]); 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [filter, setFilter] = useState(localStorage.getItem("taskFilter") || "all"); // Load filter from localStorage
 
-  // Toggle sidebar visibility
+  // Update localStorage whenever filter changes
+  useEffect(() => {
+    localStorage.setItem("taskFilter", filter);
+    console.log("🛠 Filter state updated:", filter);
+  }, [filter]);
+
   const toggleSidebar = () => {
     setMinimized(!isMinimized);
   };
 
-  // Open the modal for adding a task
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  // Close the modal
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  // Function to add a task to the task list
-  const addTask = (taskDetails) => {
-    setTasks((prevTasks) => [...prevTasks, taskDetails]);
-  };
-
-  // Function to open task modal when a date is clicked
-  const openTaskModal = (date) => {
+  const openModal = (date = null) => {
     setSelectedDate(date);
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const addTask = (taskDetails) => {
+    setTasks((prevTasks) => [...prevTasks, taskDetails]);
+  };
+
+  const openTaskModal = (date) => {
+    openModal(date);
+  };
+
   return (
     <div className={`body-container ${isMinimized ? "sidebar-minimized" : ""}`}>
-      {/* Sidebar component */}
-      <Sidebar isMinimized={isMinimized} toggleSidebar={toggleSidebar} />
+      <Sidebar 
+        isMinimized={isMinimized} 
+        toggleSidebar={toggleSidebar} 
+        setFilter={(newFilter) => {
+          console.log("✅ Sidebar setFilter called with:", newFilter);
+          setFilter(newFilter);
+        }}  
+        activeFilter={filter} 
+      />
 
       <div className="content">
         <div className="header">
           <h1>To-Do Tasks</h1>
-          {/* Button to open the modal */}
           <button id="add-task-btn" onClick={openModal}>
             Add Task
           </button>
         </div>
 
-        {/* Pass tasks to the Calendar component */}
-        <Calendar tasks={tasks} onDateClick={openTaskModal} />
+        {/* Filtered tasks passed to Calendar */}
+        <Calendar 
+          tasks={tasks.filter((task) => filter === "all" || task.status.toLowerCase() === filter)} 
+          setTasks={setTasks} 
+          filter={filter} 
+          onDateClick={openTaskModal} 
+        />
       </div>
 
-      {/* Modal component to show tasks for a selected date */}
       <Modal
         isOpen={isModalOpen}
         closeModal={closeModal}
         addTask={addTask}
         tasks={tasks.filter((task) => task.date === selectedDate)}
+        setTasks={setTasks}
       />
     </div>
   );

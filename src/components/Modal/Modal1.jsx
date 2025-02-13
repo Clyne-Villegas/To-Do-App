@@ -6,7 +6,7 @@ const Modal = ({ isOpen, closeModal, addTask, tasks }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content1">
         <button className="close-btn" onClick={closeModal}>
           ✖
         </button>

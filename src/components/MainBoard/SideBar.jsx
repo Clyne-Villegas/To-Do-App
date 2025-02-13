@@ -1,28 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SideBar.css";
 
-function Sidebar({ isMinimized, toggleSidebar }) {
+function Sidebar({ isMinimized, toggleSidebar, setFilter, activeFilter }) {
+  useEffect(() => {
+    const storedFilter = localStorage.getItem("taskFilter");
+    if (storedFilter) {
+      setFilter(storedFilter); // Restore the filter
+    }
+  }, [setFilter]);
+
+  const handleFilterChange = (filter) => {
+    if (typeof setFilter === "function") {
+      setFilter(filter);
+      localStorage.setItem("taskFilter", filter); // Persist filter selection
+    }
+  };
+
   return (
     <div className={`sidebar ${isMinimized ? "minimized" : ""}`}>
-      {/* Toggle Button */}
       <div className="toggle-btn" onClick={toggleSidebar}>
         {!isMinimized && <span className="menu-text">Menu</span>}
         <i className="fas fa-bars"></i>
       </div>
 
       <ul>
-        <li>
-          <i className="fas fa-tasks"></i> {!isMinimized && <span>All Tasks</span>}
-        </li>
-        <li>
-          <i className="fas fa-check-circle"></i> {!isMinimized && <span>Completed Tasks</span>}
-        </li>
-        <li>
-          <i className="fas fa-clock"></i> {!isMinimized && <span>Pending Tasks</span>}
-        </li>
-        <li>
-          <i className="fas fa-exclamation-triangle"></i> {!isMinimized && <span>Missing Tasks</span>}
-        </li>
+        {["all", "completed", "pending", "late", "missing"].map((filter) => (
+          <li
+            key={filter}
+            className={activeFilter === filter ? "active" : ""}
+            onClick={() => handleFilterChange(filter)}
+          >
+            <i className={`fas ${
+              filter === "all" ? "fa-tasks" :
+              filter === "completed" ? "fa-check-circle" :
+              filter === "pending" ? "fa-clock" :
+              filter === "late" ? "fa-hourglass-half" :
+              "fa-exclamation-triangle"
+            }`}></i>
+            {!isMinimized && <span>{filter.charAt(0).toUpperCase() + filter.slice(1)} Tasks</span>}
+          </li>
+        ))}
       </ul>
     </div>
   );

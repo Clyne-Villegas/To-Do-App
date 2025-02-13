@@ -51,11 +51,22 @@ function Modal({ isOpen, closeModal, addTask }) {
             </svg>
           </button>
         </div>
-        
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            addTask(taskDetails); // Adds task details to parent
+
+            // Create Date object for the task's date and time
+            const taskDateTime = new Date(`${taskDetails.date}T${taskDetails.time}`);
+
+            // Get current date and time and normalize (remove milliseconds)
+            const currentDateTime = new Date();
+            currentDateTime.setSeconds(0, 0); // Reset seconds and milliseconds to avoid precision issues
+            taskDateTime.setSeconds(0, 0); // Ensure comparison is accurate
+
+            // Determine status
+            const status = taskDateTime >= currentDateTime ? "Pending" : "Missing";
+
+            addTask({ ...taskDetails, status }); // Add task with status
             handleClose(); // Close modal and reset form
           }}
         >

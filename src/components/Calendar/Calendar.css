@@ -5,14 +5,13 @@
     gap: 1px;
     background: #ddd;
     padding: 10px;
-    overflow-y: hidden; /* Remove vertical scroll if you don't want it */
-    height: 100%; /* Let the calendar take up all available height */
+    overflow-y: hidden;
+    height: 100%;
 }
 
-/* If you want to allow scrolling inside the calendar body, you can control the max-height */
 .calendar-body.scrolling {
     overflow-y: auto;
-    max-height: calc(100vh - 200px); /* Adjust based on available space */
+    max-height: calc(100vh - 200px);
 }
 
 /* Calendar Controls */
@@ -114,7 +113,6 @@
 
 /* Task Items */
 .task {
-    background: #4285F4;
     color: white;
     padding: 5px 8px;
     margin-top: 5px;
@@ -122,20 +120,125 @@
     font-size: 12px;
     cursor: pointer;
     z-index: 1;
+    width: 100%;
+    max-width: 90%;
+    display: block;
+    text-align: center;
 }
 
-/* Alternate Task Colors */
-.task:nth-child(odd) {
+/* Completed tasks (Green) */
+.task.completed {
     background: #34A853;
 }
 
-.task:nth-child(even) {
+/* Missing tasks (Red) */
+.task.missing {
     background: #EA4335;
+}
+
+/* Pending tasks (Light Orange) */
+.task.pending {
+    background: #FBBC05;
+}
+
+/* Late tasks (Darker Orange) */
+.task.late {
+    background: #E67E22;
+}
+
+/* Default task color (if no status is set) */
+.task.default {
+    background: #5e1b89;
 }
 
 /* Hover effect for tasks */
 .task:hover {
-    background-color: #3c9dff;
+    opacity: 0.8;
+}
+
+/* Task Card */
+.task-card {
+    position: relative; /* Ensure positioning works */
+    width: 100%; 
+    max-width: 700px;
+    padding: 10px;
+    margin: 10px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
+    overflow: visible; /* Allow dropdown to be visible */
+}
+
+/* Task Card Header */
+.task-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of menu */
+}
+
+/* Task Menu Button */
+.task-menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.task-menu-btn:hover {
+    color: #FF7F4D;
+}
+
+.task-menu-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Task Dropdown */
+.task-dropdown {
+    position: absolute;
+    top: 30px; /* Adjust dropdown position below the button */
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    z-index: 10;
+}
+
+.task-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.task-dropdown button:hover {
+    background: #f4f4f4;
+}
+
+.task-card p {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: block;
+    max-width: 100%;
+}
+  
+.task-card h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
 }
 
 /* Modal styles */
@@ -145,7 +248,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,7 +259,7 @@
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
   }
   

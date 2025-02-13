@@ -78,9 +78,59 @@ h2 {
     margin: 0;
 }
 
-/* Form Field Styling */
+/* Ensure consistency across form fields */
 .form-field {
+    display: flex;
+    flex-direction: column; /* Stack label & input */
     margin-bottom: 20px;
+}
+
+/* Style the label */
+.form-field label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Wrapper for select dropdown */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Style the dropdown to match inputs */
+.select-wrapper select {
+    appearance: none; /* Remove default browser styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect (Matches input fields) */
+.select-wrapper select:focus {
+    border-color: #ff7f4d;
+    box-shadow: 0 0 5px rgba(255, 127, 77, 0.4);
+    outline: none;
+}
+
+/* Custom dropdown arrow */
+.select-wrapper::after {
+    content: "▼"; /* Unicode arrow */
+    font-size: 14px;
+    color: #555;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 label {
@@ -135,6 +185,7 @@ textarea {
 #add-task-btn1:hover {
     background-color: #5e1b89;
 }
+
 
 /* Optional: Mobile Responsiveness */
 @media (max-width: 600px) {
