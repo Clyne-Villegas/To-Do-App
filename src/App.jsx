@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "./components/header/Navbar";
+import Navbar from "./components/Header/Navbar";
 import Body from "./components/MainBoard/MainBoard_Body";
 
 function App() {
