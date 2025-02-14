@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiInfo } from "react-icons/fi";
 import "./Navbar.css";
-import logo from "../../assets/LexMeet.png"; // Import your logo
+import logo from "../../assets/lexmeet.png"; // Import your logo
 
 const Navbar = () => {
   const [tooltipPosition, setTooltipPosition] = useState("center");
