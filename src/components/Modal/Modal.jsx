@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Modal.css"; // Modal styles
+import "./Modal.css";
 
 function Modal({ isOpen, closeModal, addTask }) {
   const [taskDetails, setTaskDetails] = useState({
@@ -17,7 +17,6 @@ function Modal({ isOpen, closeModal, addTask }) {
     }));
   };
 
-  // Reset the task details when the modal is closed
   const handleClose = () => {
     setTaskDetails({
       title: "",
@@ -33,11 +32,9 @@ function Modal({ isOpen, closeModal, addTask }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {/* Modal Header with Close Button */}
         <div className="modal-header">
           <h2 id="modal-title">Add New Task</h2>
           <button className="close-btn" onClick={handleClose}>
-            {/* SVG Close Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -55,19 +52,18 @@ function Modal({ isOpen, closeModal, addTask }) {
           onSubmit={(e) => {
             e.preventDefault();
 
-            // Create Date object for the task's date and time
             const taskDateTime = new Date(`${taskDetails.date}T${taskDetails.time}`);
 
             // Get current date and time and normalize (remove milliseconds)
             const currentDateTime = new Date();
-            currentDateTime.setSeconds(0, 0); // Reset seconds and milliseconds to avoid precision issues
-            taskDateTime.setSeconds(0, 0); // Ensure comparison is accurate
+            currentDateTime.setSeconds(0, 0);
+            taskDateTime.setSeconds(0, 0);
 
             // Determine status
             const status = taskDateTime >= currentDateTime ? "Pending" : "Missing";
 
-            addTask({ ...taskDetails, status }); // Add task with status
-            handleClose(); // Close modal and reset form
+            addTask({ ...taskDetails, status });
+            handleClose();
           }}
         >
           <div className="form-field">

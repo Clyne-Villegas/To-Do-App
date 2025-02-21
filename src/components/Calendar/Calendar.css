@@ -1,4 +1,3 @@
-/* Calendar Body */
 .calendar-body {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -39,7 +38,6 @@
     color: #FF7F4D; 
 }
 
-/* Month and Year Display with Pickers */
 .month-year-display {
     display: flex;
     align-items: center;
@@ -63,7 +61,6 @@
     border-color: #4285F4; 
 }
 
-/* Calendar Header (Days of the Week) */
 .calendar-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -75,7 +72,6 @@
     border-bottom: 2px solid #ddd;
 }
 
-/* Individual Days */
 .calendar-day {
     min-height: 120px;
     background: white;
@@ -91,18 +87,15 @@
     border-radius: 5px;
 }
 
-/* Empty slots */
 .calendar-day.empty {
     background-color: #f9f9f9;
 }
 
-/* Hover effect for days */
 .calendar-day:hover {
     background: #f0f0f0;
     cursor: pointer;
 }
 
-/* Date Number */
 .date-number {
     font-weight: bold;
     color: #333;
@@ -126,39 +119,32 @@
     text-align: center;
 }
 
-/* Completed tasks (Green) */
 .task.completed {
     background: #34A853;
 }
 
-/* Missing tasks (Red) */
 .task.missing {
     background: #EA4335;
 }
 
-/* Pending tasks (Light Orange) */
 .task.pending {
     background: #FBBC05;
 }
 
-/* Late tasks (Darker Orange) */
 .task.late {
     background: #E67E22;
 }
 
-/* Default task color (if no status is set) */
 .task.default {
     background: #5e1b89;
 }
 
-/* Hover effect for tasks */
 .task:hover {
     opacity: 0.8;
 }
 
-/* Task Card */
 .task-card {
-    position: relative; /* Ensure positioning works */
+    position: relative; 
     width: 100%; 
     max-width: 700px;
     padding: 10px;
@@ -167,18 +153,16 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     word-wrap: break-word;
-    overflow: visible; /* Allow dropdown to be visible */
+    overflow: visible; 
 }
 
-/* Task Card Header */
 .task-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative; /* Needed for absolute positioning of menu */
+    position: relative; 
 }
 
-/* Task Menu Button */
 .task-menu-btn {
     background: transparent;
     border: none;
@@ -198,10 +182,9 @@
     align-items: center;
 }
 
-/* Task Dropdown */
 .task-dropdown {
     position: absolute;
-    top: 30px; /* Adjust dropdown position below the button */
+    top: 30px; 
     right: 0;
     background: white;
     border: 1px solid #ddd;
@@ -241,7 +224,6 @@
     color: #333;
 }
 
-/* Modal styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -281,7 +263,7 @@
   }
   
   .selected {
-    background-color: #f0f0f0; /* Highlight selected day */
+    background-color: #f0f0f0;
   }
   
 
@@ -297,8 +279,8 @@
     }
     .calendar-body {
         grid-template-columns: repeat(7, 1fr);
-        max-height: calc(100vh - 120px); /* Adjust for small screens */
-        overflow-y: auto; /* Allow scrolling in small screens */
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
     }
     .calendar-day {
         min-height: 80px;

@@ -1,19 +1,18 @@
 import { MoreVertical } from "lucide-react";
 import { useState } from "react";
-import EditTaskModal from "../Modal/Edit-Task-Modal"; // Import the Edit Task Modal
+import EditTaskModal from "../Modal/Edit-Task-Modal";
 import "./Calendar.css";
 
-// Helper functions
 const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
 
 const Calendar = ({ tasks, setTasks, filter}) => {
   const [currentYear, setCurrentYear] = useState(2025);
-  const [currentMonth, setCurrentMonth] = useState(1); // February (0-based index)
+  const [currentMonth, setCurrentMonth] = useState(1);
   const [selectedDate, setSelectedDate] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskMenuOpen, setTaskMenuOpen] = useState(null);
-  const [editTask, setEditTask] = useState(null); // Track the task being edited
+  const [editTask, setEditTask] = useState(null);
 
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDayIndex = getFirstDayOfMonth(currentYear, currentMonth);
@@ -41,7 +40,6 @@ const Calendar = ({ tasks, setTasks, filter}) => {
     setCurrentYear(newYear);
   };
 
-  // Filter tasks based on selected category
   const filteredTasks = tasks.filter((task) => {
     if (filter === "all") return true;
     return task.status.toLowerCase() === filter;
@@ -55,26 +53,26 @@ const Calendar = ({ tasks, setTasks, filter}) => {
 
   const handleEditTask = (task) => {
     setEditTask(task);
-    setIsModalOpen(false); // Close the task modal when editing
+    setIsModalOpen(false);
   };
   
   const handleEditSubmit = (updatedTask) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.title === editTask.title && task.date === editTask.date
-          ? { ...task, ...updatedTask } // Preserve original task properties
+          ? { ...task, ...updatedTask }
           : task
       )
     );
     setEditTask(null);
-    setIsModalOpen(true); // Reopen task modal after updating
+    setIsModalOpen(true);
   };  
   
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedDate(null);
     setTaskMenuOpen(null);
-    setEditTask(null); // Close edit modal
+    setEditTask(null);
   };
 
   const toggleTaskMenu = (taskId) => {
@@ -93,7 +91,6 @@ const Calendar = ({ tasks, setTasks, filter}) => {
 
   return (
     <div className="calendar">
-      {/* Calendar Controls */}
       <div className="calendar-controls">
         <button onClick={() => changeMonth(-1)} className="arrow-btn">
           ◀
@@ -161,12 +158,12 @@ const Calendar = ({ tasks, setTasks, filter}) => {
               {/* Show only tasks that match the selected filter */}
               {tasks
                 .filter((task) => {
-                  if (task.date !== dateKey) return false; // Ensure tasks appear only on their correct date
+                  if (task.date !== dateKey) return false;
           
-                  if (filter === "all") return true; // Show all tasks
-                  if (!task.status) return false; // Ignore tasks without a status
+                  if (filter === "all") return true;
+                  if (!task.status) return false;
           
-                  return task.status.toLowerCase() === filter; // Show tasks matching the selected filter
+                  return task.status.toLowerCase() === filter;
                 })
                 .sort((a, b) => new Date(`1970-01-01T${a.time}`) - new Date(`1970-01-01T${b.time}`)) // Sort by time
                 .map((task) => (
@@ -188,7 +185,6 @@ const Calendar = ({ tasks, setTasks, filter}) => {
           );                                                 
         })}
 
-        {/* Empty spaces after last day */}
         {Array(emptySlotsAfter)
           .fill(null)
           .map((_, index) => (
@@ -243,7 +239,6 @@ const Calendar = ({ tasks, setTasks, filter}) => {
                   </div>
                 </div>
 
-                {/* 🔥 More Task Details */}
                 <p>
                   <strong>Description:</strong>{" "}
                   {task.task || "No description available"}
@@ -271,12 +266,11 @@ const Calendar = ({ tasks, setTasks, filter}) => {
         </div>
       )}
 
-      {/* Edit Task Modal */}
       {editTask && (
         <EditTaskModal 
           isOpen={!!editTask} 
-          closeModal={() => setEditTask(null)} // This will just close the edit modal
-          onSubmit={handleEditSubmit} // This will handle the submit and reopen task modal
+          closeModal={() => setEditTask(null)}
+          onSubmit={handleEditSubmit}
           taskToEdit={editTask} 
           setTasks={setTasks} 
         />

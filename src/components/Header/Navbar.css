@@ -1,4 +1,3 @@
-/* Navbar Styling */
   .navbar {
     height: 80px;
     width: 100%;
@@ -12,10 +11,9 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; /* Ensures it's above the sidebar */
+    z-index: 1000;
   }
-  
-  /* Logo */
+
   .logo-container {
     display: flex;
     align-items: center;
@@ -32,7 +30,6 @@
     font-weight: bold;
   }
   
-  /* Info Icon */
   .info-container {
     position: relative;
     cursor: pointer;
@@ -49,12 +46,11 @@
   .info-icon:hover {
     color: #ffd700;
   }
-  
-  /* Tooltip */
+
   .tooltip {
     position: absolute;
     bottom: -40px;
-    background: #ffffff; /* Pure white */
+    background: #ffffff;
     color: #5e1b89;
     padding: 8px 12px;
     border-radius: 5px;
@@ -63,10 +59,9 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    outline: 2px solid #ff7f4d; /* Purple outline */
+    outline: 2px solid #ff7f4d;
   }
-  
-  /* Tooltip positioning */
+
   .tooltip.center {
     left: 50%;
     transform: translateX(-50%);
@@ -81,7 +76,6 @@
     left: 0;
   }
   
-  /* Show tooltip on hover */
   .info-container:hover .tooltip {
     visibility: visible;
     opacity: 1;

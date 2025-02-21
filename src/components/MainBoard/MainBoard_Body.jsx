@@ -9,9 +9,8 @@ function Body() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tasks, setTasks] = useState([]); 
   const [selectedDate, setSelectedDate] = useState(null);
-  const [filter, setFilter] = useState(localStorage.getItem("taskFilter") || "all"); // Load filter from localStorage
+  const [filter, setFilter] = useState(localStorage.getItem("taskFilter") || "all");
 
-  // Update localStorage whenever filter changes
   useEffect(() => {
     localStorage.setItem("taskFilter", filter);
     console.log("🛠 Filter state updated:", filter);
@@ -34,8 +33,12 @@ function Body() {
     setTasks((prevTasks) => [...prevTasks, taskDetails]);
   };
 
-  const openTaskModal = (date) => {
-    openModal(date);
+  const completeAllTasks = () => {
+    setTasks((prevTasks) => prevTasks.map(task => ({ ...task, status: "completed" })));
+  };
+
+  const removeAllTasks = () => {
+    setTasks([]);
   };
 
   return (
@@ -53,17 +56,18 @@ function Body() {
       <div className="content">
         <div className="header">
           <h1>To-Do Tasks</h1>
-          <button id="add-task-btn" onClick={openModal}>
-            Add Task
-          </button>
+          <div className="button-group">
+            <button className="task-button" onClick={openModal}>Add Task</button>
+            <button className="task-button" onClick={completeAllTasks}>Complete All Tasks</button>
+            <button className="task-button" onClick={removeAllTasks}>Remove All Tasks</button>
+          </div>
         </div>
 
-        {/* Filtered tasks passed to Calendar */}
         <Calendar 
           tasks={tasks.filter((task) => filter === "all" || task.status.toLowerCase() === filter)} 
           setTasks={setTasks} 
           filter={filter} 
-          onDateClick={openTaskModal} 
+          onDateClick={openModal} 
         />
       </div>
 

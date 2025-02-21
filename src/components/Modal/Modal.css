@@ -37,7 +37,6 @@
     }
 }
 
-/* Modal Header with Close Button */
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -78,10 +77,9 @@ h2 {
     margin: 0;
 }
 
-/* Ensure consistency across form fields */
 .form-field {
     display: flex;
-    flex-direction: column; /* Stack label & input */
+    flex-direction: column;
     margin-bottom: 20px;
 }
 
@@ -121,9 +119,8 @@ h2 {
     outline: none;
 }
 
-/* Custom dropdown arrow */
 .select-wrapper::after {
-    content: "▼"; /* Unicode arrow */
+    content: "▼";
     font-size: 14px;
     color: #555;
     position: absolute;
@@ -186,8 +183,6 @@ textarea {
     background-color: #5e1b89;
 }
 
-
-/* Optional: Mobile Responsiveness */
 @media (max-width: 600px) {
     .modal-content {
         padding: 20px 25px;

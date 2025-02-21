@@ -87,9 +87,10 @@ function Modal({ isOpen, closeModal, taskToEdit, setTasks, tasks }) {
             <label htmlFor="status">Status:</label>
             <div className="select-wrapper">
                 <select id="status" name="status" value={taskDetails.status} onChange={handleChange}>
-                <option value="Pending">Pending</option>
                 <option value="Completed">Completed</option>
+                <option value="Pending">Pending</option>
                 <option value="Late">Late</option>
+                <option value="Missing">Missing</option>
                 </select>
             </div>
           </div>
